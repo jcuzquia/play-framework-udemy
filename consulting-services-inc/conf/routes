@@ -1,0 +1,29 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# Home page
+GET     /                           controllers.Application.index()
+
+# Service
+GET 		/services				controllers.ServiceController.list()
+GET			/services/new			controllers.ServiceController.addService()
+GET			/services/edit/:code	controllers.ServiceController.editService(code: String)
+POST		/services/save/:mode	controllers.ServiceController.save(mode: String)
+DELETE		/services/del/:code		controllers.ServiceController.delete(code: String)
+GET			/services/find/:code	controllers.ServiceController.findService(code: String)
+
+
+# Customer
+GET			/customer				controllers.CustomerController.list()
+GET			/customer/new			controllers.CustomerController.addCustomer()
+GET			/customer/edit/:id		controllers.CustomerController.editCustomer(id: Long)
+POST		/customer/save/:mode	controllers.CustomerController.save(mode: String)
+DELETE		/customer/del/:id		controllers.CustomerController.delete(id: String)
+
+
+# Map static resources from the /public folder to the /assets URL path
+#GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
+GET 	/assets/*file				controllers.Assets.at(path="/public", file)
+GET		/vassets/*file				controllers.Assets.versioned(path="/public", file:Asset)
+GET		/webjars/*file				controllers.WebJarAssets.at(file)
