@@ -9,7 +9,7 @@
 			<legend>Service</legend>
 			@helper.inputText(serviceForm.field("code"), '_label -> "Code")
 			@helper.inputText(serviceForm.field("description"), '_label -> "Description")
-			@helper.inputText(serviceForm.field("description"), '_label -> "Description")
+			@helper.textarea(serviceForm.field("description"), '_label -> "Description")
 		</fieldset>
 		<input type="submit" value="Save"/>
 	}
