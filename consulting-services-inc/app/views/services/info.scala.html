@@ -1,4 +1,16 @@
+@(serviceForm : Form[Service])
+@import helper._
+
 @main("Service info"){
 
 	<h1>Service Information</h1>
+	@helper.form(action = routes.Services.save()){
+		<fieldset>
+			<legend>Service</legend>
+			@helper.inputText(serviceForm.field("code"), '_label -> "Code")
+			@helper.inputText(serviceForm.field("description"), '_label -> "Description")
+			@helper.inputText(serviceForm.field("description"), '_label -> "Description")
+		</fieldset>
+		<input type="submit" value="Save"/>
+	}
 }

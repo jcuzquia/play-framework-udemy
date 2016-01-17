@@ -12,4 +12,8 @@ public class Services extends play.mvc.Controller{
 	public Result addService(){
 		return ok(info.render());
 	}
+	
+	public Result save(){
+		return TODO;
+	}
 }
