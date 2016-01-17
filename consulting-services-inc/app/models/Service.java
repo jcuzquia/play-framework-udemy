@@ -13,6 +13,7 @@ public class Service extends Model {
 	@Id
 	public String code;
 	public String description;
+	public double amount;
 	
 	private static Model.Finder<String, Service> find = new Model.Finder<>(Service.class);
 	

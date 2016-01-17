@@ -4,6 +4,7 @@ import java.util.List;
 
 import models.Service;
 import play.data.Form;
+import play.libs.Json;
 import play.mvc.Result;
 import views.html.services.info;
 
@@ -14,7 +15,7 @@ public class Services extends play.mvc.Controller{
 	public Result list(){
 		List<Service> allServices = Service.findAll();
 		
-		return TODO;
+		return ok(Json.toJson(allServices));
 	}
 	
 	public Result addService(){

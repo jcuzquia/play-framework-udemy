@@ -6,6 +6,7 @@
 create table service (
   code                      varchar(255) not null,
   description               varchar(255),
+  amount                    double,
   constraint pk_service primary key (code))
 ;
 
