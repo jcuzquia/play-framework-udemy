@@ -1,5 +1,7 @@
 package controllers;
 
+import java.util.List;
+
 import models.Service;
 import play.data.Form;
 import play.mvc.Result;
@@ -8,7 +10,10 @@ import views.html.services.info;
 public class Services extends play.mvc.Controller{
 
 	private static final Form<Service> sServiceForm = Form.form(Service.class);
+	
 	public Result list(){
+		List<Service> allServices = Service.findAll();
+		
 		return TODO;
 	}
 	
@@ -18,6 +23,9 @@ public class Services extends play.mvc.Controller{
 	}
 	
 	public Result save(){
-		return TODO;
+		Form<Service> ourForm = sServiceForm.bindFromRequest();
+		Service service = ourForm.get();
+		service.save();
+		return redirect(routes.Services.addService());
 	}
 }
