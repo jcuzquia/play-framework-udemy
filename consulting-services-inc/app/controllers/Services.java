@@ -1,6 +1,7 @@
 package controllers;
 
 import play.mvc.Result;
+import views.html.services.info;
 
 public class Services extends play.mvc.Controller{
 
@@ -8,7 +9,7 @@ public class Services extends play.mvc.Controller{
 		return TODO;
 	}
 	
-	public Result newService(){
-		return TODO;
+	public Result addService(){
+		return ok(info.render());
 	}
 }
