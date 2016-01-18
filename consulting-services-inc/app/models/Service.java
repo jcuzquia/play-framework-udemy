@@ -21,9 +21,12 @@ public class Service extends Model {
 		return Service.find.orderBy("code").findList();
 	}
 
-	public static Service retrieve(String code2) {
-		// TODO Auto-generated method stub
-		return null;
+	public static Service retrieve(String code) {
+		return find.ref(code);
+	}
+
+	public static boolean exists(String code) {
+		return (find.where().eq("code", code).findRowCount() == 1) ? true : false;
 	}
 	
 }

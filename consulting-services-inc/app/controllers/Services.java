@@ -26,7 +26,11 @@ public class Services extends play.mvc.Controller{
 		Form<Service> ourForm = sServiceForm.bindFromRequest();
 		if(!ourForm.hasErrors()){
 			Service service = ourForm.get();
-			service.save();
+			if(Service.exists(service.code)){
+				service.update();
+			} else {
+				service.save();
+			}
 			return redirect(routes.Services.addService());
 		}
 		
