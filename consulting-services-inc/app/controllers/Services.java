@@ -3,6 +3,7 @@ package controllers;
 import java.util.List;
 
 import models.Service;
+import play.Logger;
 import play.data.Form;
 import play.mvc.Result;
 import views.html.services.info;
@@ -19,11 +20,12 @@ public class Services extends play.mvc.Controller{
 	
 	public Result addService(){
 		
-		return ok(info.render(sServiceForm));
+		return ok(info.render(sServiceForm, "Adding"));
 	}
 	
 	public Result save(){
 		Form<Service> ourForm = sServiceForm.bindFromRequest();
+		Logger.debug("ERRORS: " + ourForm.errors().toString());
 		if(!ourForm.hasErrors()){
 			Service service = ourForm.get();
 			if(Service.exists(service.code)){
@@ -32,9 +34,11 @@ public class Services extends play.mvc.Controller{
 				service.save();
 			}
 			return redirect(routes.Services.addService());
+		}else{
+			//we have an error, show it on the screen
+			flash("errors found", "Please fix the errors on the page");
+			return badRequest(info.render(ourForm));
 		}
-		
-		return redirect(routes.Services.list());
 	}
 	
 	public Result info(String code){
@@ -44,7 +48,7 @@ public class Services extends play.mvc.Controller{
 		}
 		
 		Form<Service> fillForm = sServiceForm.fill(service);
-		return ok(info.render(fillForm));
+		return ok(info.render(fillForm, "Editing: " + service.description));
 		
 	}
 }

@@ -10,7 +10,7 @@ GET		/services					controllers.Services.list()
 GET		/services/new				controllers.Services.addService()
 GET		/services/:code				controllers.Services.info(code: String)
 
-POST	/services					controllers.Services.save()
+POST	/services/:mode				controllers.Services.save(mode: String)
 
 
 

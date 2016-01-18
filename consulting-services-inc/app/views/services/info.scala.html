@@ -1,4 +1,4 @@
-@(serviceForm : Form[Service])
+@(serviceForm : Form[Service])(mode: String)
 @import helper._
 
 @main("Service info"){
@@ -6,12 +6,18 @@
 	<h1>Service Information</h1>
 	@helper.form(action = routes.Services.save()){
 		<fieldset>
-			<legend>Service</legend>
+			<legend>Service (@mode)</legend>
+			@if(mode == "Adding"){
+				@helper.inputText(serviceForm.field("code"), '_label -> "Code")
+			}else {
+				@helper.inputText(serviceForm.field("code"), '_label -> "Code", 'readOnly -> "readOnly")
+			}
 			@helper.inputText(serviceForm.field("code"), '_label -> "Code")
 			@helper.inputText(serviceForm.field("amount"), '_label -> "Amount")
 			@helper.textarea(serviceForm.field("description"), '_label -> "Description")
 		</fieldset>
 		<input type="submit" value="Save"/>
-		<button onclick="window.location='@routes.Services.list()';" value="cancel">Cancel</button>
 	}
+	<button onclick="window.location='@routes.Services.list()';" value="cancel">Cancel</button>
+	
 }

@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import play.data.validation.*;
 
 import com.avaje.ebean.Model;
 
@@ -12,7 +13,11 @@ public class Service extends Model {
 	
 	@Id
 	public String code;
+	
+	@Constraints.Required
 	public String description;
+	
+	@Constraints.Required
 	public double amount;
 	
 	private static Model.Finder<String, Service> find = new Model.Finder<>(Service.class);
