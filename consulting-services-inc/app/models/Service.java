@@ -20,5 +20,10 @@ public class Service extends Model {
 	public static List<Service> findAll(){
 		return Service.find.orderBy("code").findList();
 	}
+
+	public static Service retrieve(String code2) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }

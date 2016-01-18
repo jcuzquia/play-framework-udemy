@@ -32,4 +32,15 @@ public class Services extends play.mvc.Controller{
 		
 		return redirect(routes.Services.list());
 	}
+	
+	public Result info(String code){
+		Service service = Service.retrieve(code);
+		if(service == null){
+			return notFound(code + " is not on file");
+		}
+		
+		Form<Service> fillForm = sServiceForm.fill(service);
+		return ok(info.render(fillForm));
+		
+	}
 }
