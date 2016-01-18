@@ -1,0 +1,26 @@
+@(services: List[Service])
+
+@main("Consulting Inc Services"){
+	<h2>All Services</h2>
+	
+	<table>
+	<thead>
+		<tr>
+			<th>Code</th>
+			<th>Description</th>
+			<th>Amount</th>
+		</tr>
+	</thead>
+	<tbody>
+		@for(service <- services){
+			<tr>
+				<td>@service.code</td>
+				<td>@service.description</td>
+				<td>@service.amount</td>
+			</tr>
+		}
+	
+	</tbody>
+	</table>
+	<button onclick="window.location='@routes.Services.addService()';" value="add">Add New</button>
+}

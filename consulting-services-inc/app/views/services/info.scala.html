@@ -12,5 +12,6 @@
 			@helper.textarea(serviceForm.field("description"), '_label -> "Description")
 		</fieldset>
 		<input type="submit" value="Save"/>
+		<button onclick="window.location='@routes.Services.list()';" value="cancel">Cancel</button>
 	}
 }
