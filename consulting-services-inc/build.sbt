@@ -12,7 +12,7 @@ libraryDependencies ++= Seq(
   jdbc,
   ws,
   evolutions,
-  "org.webjars" % "webjars-play" % "2.4.0-1",
+  "org.webjars" %% "webjars-play" % "2.4.0-1",
   "org.webjars" % "bootstrap" % "3.3.4",
   "com.adrianhurt" % "play-bootstrap3_2.11" % "0.4.4-P24",
   filters
