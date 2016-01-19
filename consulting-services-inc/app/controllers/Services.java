@@ -23,24 +23,6 @@ public class Services extends play.mvc.Controller{
 		return ok(info.render(sServiceForm, "Adding"));
 	}
 	
-//	public Result save(){
-//		Form<Service> ourForm = sServiceForm.bindFromRequest();
-//		Logger.debug("ERRORS: " + ourForm.errors().toString());
-//		if(!ourForm.hasErrors()){
-//			Service service = ourForm.get();
-//			if(Service.exists(service.code)){
-//				service.update();
-//			} else {
-//				service.save();
-//			}
-//			return redirect(routes.Services.addService());
-//		}else{
-//			//we have an error, show it on the screen
-//			flash("errors found", "Please fix the errors on the page");
-//			return badRequest(info.render(ourForm));
-//		}
-//	}
-	
 	public Result save(String mode){
 		Logger.debug("Mode is " + mode);
 		Form<Service> ourForm = sServiceForm.bindFromRequest();
@@ -75,5 +57,15 @@ public class Services extends play.mvc.Controller{
 		Form<Service> fillForm = sServiceForm.fill(service);
 		return ok(info.render(fillForm, "Editing: " + service.description));
 		
+	}
+	
+	public Result delete(String code){
+		Service service = Service.retrieve(code);
+		Logger.debug("Executing deletion");
+		if(service == null){
+			return notFound(code + " is not on file");
+		}
+		service.delete();
+		return redirect(routes.Services.list());
 	}
 }
