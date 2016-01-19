@@ -4,7 +4,7 @@
 @main("Service info"){
 
 	<h1>Service Information</h1>
-	@helper.form(action = routes.Services.save()){
+	@helper.form(action = routes.Services.save(mode)){
 		<fieldset>
 			<legend>Service (@mode)</legend>
 			@if(mode == "Adding"){
@@ -12,7 +12,6 @@
 			}else {
 				@helper.inputText(serviceForm.field("code"), '_label -> "Code", 'readOnly -> "readOnly")
 			}
-			@helper.inputText(serviceForm.field("code"), '_label -> "Code")
 			@helper.inputText(serviceForm.field("amount"), '_label -> "Amount")
 			@helper.textarea(serviceForm.field("description"), '_label -> "Description")
 		</fieldset>

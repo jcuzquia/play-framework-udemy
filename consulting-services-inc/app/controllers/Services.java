@@ -23,21 +23,46 @@ public class Services extends play.mvc.Controller{
 		return ok(info.render(sServiceForm, "Adding"));
 	}
 	
-	public Result save(){
+//	public Result save(){
+//		Form<Service> ourForm = sServiceForm.bindFromRequest();
+//		Logger.debug("ERRORS: " + ourForm.errors().toString());
+//		if(!ourForm.hasErrors()){
+//			Service service = ourForm.get();
+//			if(Service.exists(service.code)){
+//				service.update();
+//			} else {
+//				service.save();
+//			}
+//			return redirect(routes.Services.addService());
+//		}else{
+//			//we have an error, show it on the screen
+//			flash("errors found", "Please fix the errors on the page");
+//			return badRequest(info.render(ourForm));
+//		}
+//	}
+	
+	public Result save(String mode){
+		Logger.debug("Mode is " + mode);
 		Form<Service> ourForm = sServiceForm.bindFromRequest();
 		Logger.debug("ERRORS: " + ourForm.errors().toString());
 		if(!ourForm.hasErrors()){
 			Service service = ourForm.get();
-			if(Service.exists(service.code)){
-				service.update();
-			} else {
+			if(mode.equalsIgnoreCase("Adding")){
+				Logger.debug("CODE IS [" + service.code + "]");
+				if(service.code.equals("") || Service.exists(service.code)){
+					flash("errorsFound", "Empty primary key or primary key already exists");
+					return badRequest(info.render(ourForm, "Adding"));
+				}
 				service.save();
+			}else {
+				Logger.debug("code: " + service.code + " amount " + service.amount + " desc " + service.description);
+				service.update();
 			}
 			return redirect(routes.Services.addService());
-		}else{
-			//we have an error, show it on the screen
-			flash("errors found", "Please fix the errors on the page");
-			return badRequest(info.render(ourForm));
+		} else {
+			//show errors on the webpage
+			flash("errorsFound", "Please fix the errors on the page");
+			return badRequest(info.render(ourForm,mode));
 		}
 	}
 	
