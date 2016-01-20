@@ -5,13 +5,9 @@
 # Home page
 GET     /                           controllers.Application.index()
 
+# Service
+GET		/services					controllers.ServiceController
 
-GET		/services					controllers.Services.list()
-GET		/services/new				controllers.Services.addService()
-GET		/services/:code				controllers.Services.info(code: String)
-
-POST	/services/:mode				controllers.Services.save(mode: String)
-DELETE	/services/:code				controllers.Services.delete(code: String)
 
 
 # Map static resources from the /public folder to the /assets URL path
