@@ -1,22 +1,51 @@
-@(serviceForm : Form[Service])(mode: String)
+@(serviceForm : play.data.Form[Service])(mode: String)
 @import helper._
+@import views.html.common._
+@import models._
+@implicitFieldConstructor - @{
+	b3.horizontal.fieldConstructor("col-md-2", "col-md-8")
+}
+
+@shortFC = @{
+	b3.horizontal.fieldConstructor("col-md-2", col-md-3)
+}
 
 @main("Service info"){
 
-	<h1>Service Information</h1>
-	@helper.form(action = routes.Services.save(mode)){
+	<div class="page-header">
+		<h2>Service Information</h2>
+	</div>
+	
 		<fieldset>
 			<legend>Service (@mode)</legend>
-			@if(mode == "Adding"){
-				@helper.inputText(serviceForm.field("code"), '_label -> "Code")
-			}else {
-				@helper.inputText(serviceForm.field("code"), '_label -> "Code", 'readOnly -> "readOnly")
+			@b3.form(action = routes.ServiceController.save(mode)){
+				<input type="hidden" name="mode" value="@mode"/>
+				@if(mode == "Adding"){
+				@b3.text(serviceForm("code"), 
+					'_label -> "Code")
+				}else {
+				@b3.text(serviceForm("code"), 
+					'_label -> "Code", 
+					'readOnly -> "readOnly")
+				}
+				@b3.text(serviceForm.field("amount"), 
+					'_label -> "Amount",
+					'maxlength -> 15,
+					'placeholder -> "Amount")(shortFC, implicitly[Messages])
+				@b3.text(serviceForm("description"), 
+					'_label -> "Description",
+					'maxlength -> 50,
+					'placeholder -> "Description")
+				
+				<div class="form-group">
+					<div class="col-md-offset-3">
+						<input type="submit" class="btn btn-success" value="save"/>
+						<button type="button" class="btn btn-warning"
+						onclick="window.location='@routes.ServiceController.list()';"
+						value="cancel">Cancel</button>
+					</div>
+				</div>
 			}
-			@helper.inputText(serviceForm.field("amount"), '_label -> "Amount")
-			@helper.textarea(serviceForm.field("description"), '_label -> "Description")
-		</fieldset>
-		<input type="submit" value="Save"/>
-	}
-	<button onclick="window.location='@routes.Services.list()';" value="cancel">Cancel</button>
-	
+			
+					</fieldset>
 }
