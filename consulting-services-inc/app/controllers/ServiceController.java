@@ -53,7 +53,7 @@ public class ServiceController extends play.mvc.Controller{
 	} 
 	
 	
-	public Result editService (String code){
+	public Result editService(String code){
 		Service service = Service.retrieve(code);
 		Form<Service> ourForm = Form.form(Service.class).fill(service);
 		return ok(info.render(ourForm, ModeConst.EDIT + ": " + service.code));

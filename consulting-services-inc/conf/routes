@@ -6,7 +6,12 @@
 GET     /                           controllers.Application.index()
 
 # Service
-GET		/services					controllers.ServiceController
+GET		/services					controllers.ServiceController.list()
+GET		/services/new				controllers.ServiceController.addService()
+GET		/services/edit/:code		controllers.ServiceController.eitService(code: String)
+POST	/services/save/:mode		controllers.ServiceController.save(mode: String)
+DELETE	/services/del/:code			controllers.ServiceController.delete(code: String)
+GET		/services/find/:code		controllers.ServiceController.findService(code: String)
 
 
 
