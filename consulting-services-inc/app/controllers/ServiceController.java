@@ -7,8 +7,8 @@ import models.Service;
 import play.Logger;
 import play.data.Form;
 import play.mvc.Result;
-import views.html.services.info;
-import views.html.services.list;
+import views.html.service.info;
+import views.html.service.list;
 
 public class ServiceController extends play.mvc.Controller{
 
@@ -68,5 +68,9 @@ public class ServiceController extends play.mvc.Controller{
 		}
 		service.delete();
 		return redirect(routes.ServiceController.list());
+	}
+	
+	public Result findService(String code){
+		return TODO;
 	}
 }
