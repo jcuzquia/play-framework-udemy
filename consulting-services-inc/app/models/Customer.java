@@ -5,8 +5,10 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.avaje.ebean.Model;
@@ -40,6 +42,9 @@ public class Customer extends Model{
 	
 	@Constraints.Required(message = "required.message")
 	public String email;
+	
+	@OneToMany(mappedBy="customer", cascade=CascadeType.ALL)
+	public List<Invoice> invoiceList;
 	
 	private static Model.Finder<String, Customer> find = new Model.Finder<String, Customer>(Customer.class);
 	
