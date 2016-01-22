@@ -6,6 +6,7 @@ import constants.ModeConst;
 import models.Service;
 import play.Logger;
 import play.data.Form;
+import play.libs.Json;
 import play.mvc.Result;
 import views.html.service.info;
 import views.html.service.list;
@@ -71,6 +72,10 @@ public class ServiceController extends play.mvc.Controller{
 	}
 	
 	public Result findService(String code){
-		return TODO;
+		Service service = Service.retrieve(code);
+		if(service == null){
+			return ok("{}");
+		}
+		return ok(Json.toJson(service));
 	}
 }

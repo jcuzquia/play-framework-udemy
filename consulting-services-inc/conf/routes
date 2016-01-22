@@ -25,3 +25,12 @@ DELETE	/customer/del/:id			controllers.CustomerController.delete(id: Long)
 GET		/assets/*file				controllers.Assets.at(path="/public", file)
 GET		/vassets/*file				controllers.Assets.versioned(path="/public", file:Asset)
 GET		/webjars/*file				controllers.WebJarAssets.at(file)
+
+
+# Invoice
+GET		/invoice					controllers.InvoiceController.list()
+GET		/invoice/new				controllers.InvoiceController.addInvoice()
+GET		/invoice/edit/:id			controllers.InvoiceController.editInvoice(id: Long)
+POST	/invoice/save/:mode			controllers.InvoiceController.save(mode: String)
+POST	/invoice/search				controllers.InvoiceController.search()
+DELETE	/invoice/del/:id			controllers.InvoiceController.delete(id: Long)

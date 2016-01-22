@@ -47,7 +47,7 @@ public class Invoice extends Model{
 				Expr.ilike("customer.name", "%" + pattern + "%")).findList();
 	}
 	
-	public static Invoice retrive(Long id){
+	public static Invoice retrieve(Long id){
 		return find.byId(id.toString());
 	}
 	
