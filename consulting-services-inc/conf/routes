@@ -34,3 +34,12 @@ GET		/invoice/edit/:id			controllers.InvoiceController.editInvoice(id: Long)
 POST	/invoice/save/:mode			controllers.InvoiceController.save(mode: String)
 POST	/invoice/search				controllers.InvoiceController.search()
 DELETE	/invoice/del/:id			controllers.InvoiceController.delete(id: Long)
+
+#Invoice Detail
+GET		/invoice/detail/:id1		controllers.InvoiceController.listInvoiceDetail(id1: Long)
+GET		/invoice/detail/new/:id1	controllers.InvoiceController.addInvoiceDetail(id1: Long)
+GET		/invoice/detail/edit/:id1/:id2	controllers.InvoiceController.editInvoiceDetail(id1: Long, id2: Long)
+POST	/invoice/detail/save/:id1/:mode	controllers.InvoiceController.saveInvoiceDetail(id1: Long, mode: String)
+DELETE	/invoice/detail/del/:id1/:id2	controllers.InvoiceController.deleteInvoiceDetail(id1: Long, id2: Long)
+
+

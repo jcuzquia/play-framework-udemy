@@ -4,6 +4,7 @@ import java.util.List;
 
 import constants.ModeConst;
 import models.Invoice;
+import models.InvoiceDetail;
 import models.InvoiceSearchForm;
 import play.Logger;
 import play.data.Form;
@@ -11,6 +12,7 @@ import play.mvc.Controller;
 import play.mvc.Result;
 import views.html.invoice.list;
 import views.html.invoice.info;
+import views.html.invoice.list_detail;
 
 public class InvoiceController extends Controller {
 	
@@ -78,5 +80,52 @@ public class InvoiceController extends Controller {
 			invoice.delete();
 		}
 		return redirect(routes.InvoiceController.list());
+	}
+	
+	public Result listInvoiceDetail(Long invoiceId){
+		List<InvoiceDetail> detailList = InvoiceDetail.findAllByInvoice(invoiceId);
+		return ok(list_detail.render(detailList, invoiceId));
+	}
+	
+	public Result addInvoiceDetail(Long invoiceId){
+		Form<InvoiceDetail> myForm = Form.form(InvoiceDetail.class);
+		return ok(info_detail.render(myForm, invoiceId, ModeConst.ADD));
+	}
+	
+	public Result editInvoiceDetail(Long invoiceId, Long invoiceDetailId){
+		InvoiceDetail detail = InvoiceDetail.retrieve(invoiceDetailId);
+		Form<InvoiceDetail> myForm = Form.form(InvoiceDetail.class).fill(detail);
+		return ok(info_detail.render(myForm, invoiceId, ModeConst.EDIT));
+	}
+	
+	public Result saveInvoiceDetail(Long invoiceId, String mode){
+		Form<InvoiceDetail> myForm = Form.form(InvoiceDetail.class).bindFromRequest();
+		if(myForm.hasErrors()){
+			return badRequest(info_detail.render(myForm, invoiceId, mode));
+		}
+		
+		InvoiceDetail detail = myForm.get();
+		if(detail!=null){
+			if(ModeConst.ADD.equals(mode)){
+				detail.invoice = Invoice.retrieve(invoiceId);
+				detail.save();
+				return redirect(routes.InvoiceController.addInvoiceDetail(invoiceId));
+			} else if (ModeConst.EDIT.equals(mode)){
+				detail.invoice = Invoice.retrieve(invoiceId);
+				detail.update();
+				return redirect(routes.InvoiceController.editInvoiceDetail(invoiceId, detail.id));
+			}
+		}
+		
+		return badRequest(info_detail.render(myForm, invoiceId, mode));
+	}
+	
+	public Result deleteInvoiceDetail(Long invoiceId, Long invoiceDetailId){
+		InvoiceDetail detail = InvoiceDetail.retrieve(invoiceDetailId);
+		
+		if(detail != null){
+			detail.delete();
+		}
+		return redirect(routes.InvoiceController.listInvoiceDetail(invoiceId));
 	}
 }
