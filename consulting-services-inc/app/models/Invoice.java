@@ -3,10 +3,12 @@ package models;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -33,6 +35,8 @@ public class Invoice extends Model{
 	@Formats.DateTime(pattern = "dd/MM/yyyy")
 	public Date date;
 	
+	@OneToMany(mappedBy = "invoice", cascade = CascadeType.ALL)
+	public List<InvoiceDetail> invoiceDetailList;
 	
 	
 	private static Finder<String, Invoice> find = new Model.Finder<String, Invoice>(Invoice.class);

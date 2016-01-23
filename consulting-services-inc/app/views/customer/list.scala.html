@@ -51,9 +51,12 @@
 	</div>
 	<div class="btn-group">
 		<div>
-			<div class="btn btn-success" 
+			<button class="btn btn-success" 
 			onclick="window.location='@routes.CustomerController.addCustomer()';"
-			value="add">Add</div>
+			value="add">Add New Customer</button>
+			<button class="btn btn-info"
+			onclick="window.location='@routes.InvoiceController.list()';"
+			value="edit">View Invoices</button>
 		</div>
 	</div>
 		
