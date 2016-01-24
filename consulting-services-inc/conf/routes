@@ -42,4 +42,6 @@ GET		/invoice/detail/edit/:id1/:id2	controllers.InvoiceController.editInvoiceDet
 POST	/invoice/detail/save/:id1/:mode	controllers.InvoiceController.saveInvoiceDetail(id1: Long, mode: String)
 DELETE	/invoice/detail/del/:id1/:id2	controllers.InvoiceController.deleteInvoiceDetail(id1: Long, id2: Long)
 
-
+# Javascript Routes for AJAX call
+GET		/services/find/:code		controllers.ServiceController.findService(code: String)
+GET		/jsServiceRoutes			controllers.ServiceController.jsServiceRoutes()

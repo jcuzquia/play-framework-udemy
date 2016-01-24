@@ -10,8 +10,9 @@ import play.Logger;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
-import views.html.invoice.list;
 import views.html.invoice.info;
+import views.html.invoice.list;
+import views.html.invoice.info_detail;
 import views.html.invoice.list_detail;
 
 public class InvoiceController extends Controller {

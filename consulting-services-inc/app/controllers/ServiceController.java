@@ -5,6 +5,7 @@ import java.util.List;
 import constants.ModeConst;
 import models.Service;
 import play.Logger;
+import play.Routes;
 import play.data.Form;
 import play.libs.Json;
 import play.mvc.Result;
@@ -69,6 +70,12 @@ public class ServiceController extends play.mvc.Controller{
 		}
 		service.delete();
 		return redirect(routes.ServiceController.list());
+	}
+	
+	public Result jsServiceRoutes (){
+		response().setContentType("text/javascript");
+		return ok(Routes.javascriptRouter("jsServiceRoutes",
+				routes.javascript.ServiceController.findService()));
 	}
 	
 	public Result findService(String code){

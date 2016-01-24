@@ -8,8 +8,8 @@ import play.Logger;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
-import views.html.customer.list;
 import views.html.customer.info;
+import views.html.customer.list;
 
 public class CustomerController extends Controller{
 

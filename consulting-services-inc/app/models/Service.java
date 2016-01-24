@@ -1,18 +1,20 @@
 package models;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import play.data.validation.*;
-
 import com.avaje.ebean.Model;
 
 import constants.ModeConst;
+import play.data.validation.Constraints;
+import play.data.validation.ValidationError;
 
 @Entity
 @Table(name = "service")
@@ -56,6 +58,15 @@ public class Service extends Model {
 		}
 		
 		return errors.isEmpty() ? null : errors;
+	}
+	
+	public static Map<String, String> options(){
+		Map<String, String> map = new LinkedHashMap<String, String>();
+		List<Service> listOfServices = findAll();
+		for(Service c: listOfServices){
+			map.put(c.code, c.code);
+		}
+		return map;
 	}
 	
 }
